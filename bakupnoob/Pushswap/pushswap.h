@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 13:04:28 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/03/28 18:08:20 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/03/27 22:06:35 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 typedef struct s_list
 {
 	int				num;
-	int				chunk;
 	struct s_list	*next;
 	struct s_list	*previous;
 }	t_list;
@@ -30,12 +29,7 @@ typedef struct s_list
 // UTILS
 int		ft_atoi(const char *str);
 t_list	*ft_lstnew(int num);
-int		ft_divide_stack(t_list **stack_a, t_list **stack_b, int pivot, int *q, int *i);
-int		ft_div_stack_b(t_list **stack_a, t_list **stack_b, int pivot, int *i);
-
-//MAIN
-int		ft_topchunk_len(t_list *stack);
-
+int		ft_divide_stack(t_list **stack_a, t_list **stack_b, int pivot, int *q);
 // OPERATIONS CECH POINT!!!
 t_list	*ft_popart(t_list **stack);
 int		ft_swap(t_list **stack1, t_list **stack2, int code);
@@ -54,7 +48,6 @@ int		*ft_store_array(t_list *stack, int len, int *pivot);
 int		ft_sort_array(int **array,int len);
 
 //STACK A-B OPERATIONS
-int		ft_sort_two(t_list **stack_a, t_list **stack_b, int flag);
 int		ft_srt3a(t_list **stack_a, t_list **stack_b);
 int		ft_srt3b(t_list **stack_a, t_list **stack_b);
 #endif

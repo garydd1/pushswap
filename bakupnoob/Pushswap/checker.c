@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 22:15:08 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/03/27 23:15:04 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/03/27 21:25:38 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@
  * @return int 0 when sorted 1 when not sorted.
  */
 int	ft_is_sorted(t_list *stack)
-{	
+{
+	int		i;		
 	t_list	*aux;
 
+	i = 0;
 	aux = stack;
 	while (stack->next != aux)
 	{
@@ -35,7 +37,7 @@ int	ft_is_sorted(t_list *stack)
 
 /**
  * @brief Checks if the stack contains nodes with
- * lower/higher values than pivot.
+ * lower values than pivot.
  * @param stack 
  * @param pivot 
  * @param flag 1 for finding lowers. 2 for highers.

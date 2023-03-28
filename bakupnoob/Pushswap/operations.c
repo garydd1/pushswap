@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:35:33 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/03/28 12:07:58 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/03/24 18:53:45 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	ft_swap(t_list **stack1, t_list **stack2, int code)
 	return (0);
 }
 //CHECKPOOINT!!!!
-
 /**
  * @brief Takes the top element from one list 
  * and places it at the top of the other. Always push 
@@ -70,6 +69,7 @@ int	ft_swap(t_list **stack1, t_list **stack2, int code)
  * 2(pa).
  * @return int 
  */
+
 int	ft_push(t_list **stack1, t_list **stack2, int code)
 {
 	t_list	*aux;
@@ -77,12 +77,10 @@ int	ft_push(t_list **stack1, t_list **stack2, int code)
 	if ((*stack2) == NULL)
 	{
 		(*stack2) = ft_popart(&(*stack1));
-		// (*stack2)->chunk++; //CARE
 		write(1, "pb\n", 3);
 		return (0);
 	}
 	aux = ft_popart(&(*stack1));
-	// (aux)->chunk++; // CARE
 	aux->next = (*stack2);
 	aux->previous = (*stack2)->previous;
 	(*stack2)->previous->next = aux;

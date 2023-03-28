@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 13:38:30 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/03/28 12:41:25 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/03/27 22:06:25 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ t_list	*ft_lstnew(int num)
 	new_node -> num = num;
 	new_node -> next = NULL;
 	new_node -> previous = NULL;
-	new_node -> chunk = 0;
 	return (new_node);
 }
 
@@ -79,13 +78,12 @@ t_list	*ft_lstnew(int num)
  * @param pivot 
  * @return int 
  */
-int	ft_divide_stack(t_list **stack_a, t_list **stack_b, int pivot, int *q, int *i)
+int	ft_divide_stack(t_list **stack_a, t_list **stack_b, int pivot, int *q)
 {
 	while (ft_has_lower_higher((*stack_a), pivot, 1) == 1)
 	{
 		if ((*stack_a)->num < pivot)
 		{
-			(*stack_a)->chunk = *i;
 			ft_push(&(*stack_a), &(*stack_b), 1);
 			(*q)++;
 		}
@@ -94,28 +92,6 @@ int	ft_divide_stack(t_list **stack_a, t_list **stack_b, int pivot, int *q, int *
 		else
 			ft_rotate(&(*stack_a), &(*stack_b), 1);
 	}
-	return (0);
-}
 
-int	ft_div_stack_b(t_list **stack_a, t_list **stack_b, int pivot, int *i)
-{
-	int j;
-
-	j = 0;
-	while (ft_has_lower_higher(*stack_b, pivot, 2) == 1)
-	{
-		if ((*stack_b)->num > pivot)
-		{
-			(*stack_b)->chunk = *i; //CARE		
-			ft_push(&(*stack_b), &(*stack_a), 2);
-		}
-		else
-		{
-			ft_rotate(&(*stack_a), &(*stack_b), 2);
-			j++;
-		}	
-	}
-	while (j-- > 0)
-		ft_rotate(&(*stack_a), &(*stack_b), 4);
 	return (0);
 }
