@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:48:26 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/03/27 23:30:49 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/03/28 22:28:51 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ int	ft_sort_two(t_list **stack_a, t_list **stack_b, int flag)
 			ft_swap(&(*stack_a), NULL, 1);
 	if (flag == 2)
 	{
+		if (ft_lowest_len(*stack_b, 2) == 1)
+		{
+			ft_push(&(*stack_b), &(*stack_a), 2);
+			return (0);
+		}
 		if ((*stack_b)->num < (*stack_b)->next->num)
 			ft_swap(&(*stack_b), NULL, 2);
 		ft_push(&(*stack_b), &(*stack_a), 2);
@@ -108,6 +113,67 @@ int	ft_srt3b(t_list **stack_a, t_list **stack_b)
 		return (0);
 	}
 	ft_swap(&(*stack_b), &(*stack_a), 2);
+	ft_push(&(*stack_b), &(*stack_a), 2);
+	ft_push(&(*stack_b), &(*stack_a), 2);
+	ft_push(&(*stack_b), &(*stack_a), 2);
+	return (0);
+}
+
+/**
+ * @brief Auxiliry function for acomplishing the sort and push form stack_b
+ * to stack_a.
+ * @return int 
+ */
+static int	ft_lst_chnkb_aux(t_list **stack_a, t_list **stack_b, int *aux)
+{
+	if (aux[0] < aux[1] && aux[0] < aux[2])
+	{
+		if (aux[1] < aux[2])
+			ft_rotate(&(*stack_a), &(*stack_b), 4);
+		if (aux[1] > aux[2])
+			ft_swap(&(*stack_b), &(*stack_a), 2);	
+		ft_push(&(*stack_b), &(*stack_a), 2);
+		ft_swap(&(*stack_b), &(*stack_a), 2);
+		ft_push(&(*stack_b), &(*stack_a), 2);
+		ft_push(&(*stack_b), &(*stack_a), 2);
+		return (1);
+	}
+	if (aux[0] > aux[1] && aux[0] > aux[2])
+	{
+		ft_push(&(*stack_b), &(*stack_a), 2);
+		if (aux[1] < aux[2])
+			ft_swap(&(*stack_b), &(*stack_a), 2);	
+		ft_push(&(*stack_b), &(*stack_a), 2);
+		ft_push(&(*stack_b), &(*stack_a), 2);
+		return (1);
+	}
+	return (0);
+}
+/**
+ * @brief Sort last three nodes of b. 
+ * pushing them to a in descending order.
+ * @param stack_a 
+ * @param stack_b 
+ * @return int 
+ */
+int	ft_lastchunkb(t_list **stack_a, t_list **stack_b)
+{	
+	int	aux[3];
+	
+	aux[0] = (*stack_b)->num;
+	aux[1] = (*stack_b)->next->num;
+	aux[2] = (*stack_b)->next->next->num;
+	if (ft_lowest_len(*stack_b, 2) < 3)
+	{
+		ft_sort_two(&(*stack_a), &(*stack_b), 2);	
+		return (0);
+	}
+	if (ft_lst_chnkb_aux(&(*stack_a), &(*stack_b), aux) == 1)
+		return (0);
+	if (aux[1] < aux[2])
+		ft_rotate(&(*stack_a), &(*stack_b), 4);
+	else
+		ft_swap(&(*stack_b), &(*stack_a), 2);
 	ft_push(&(*stack_b), &(*stack_a), 2);
 	ft_push(&(*stack_b), &(*stack_a), 2);
 	ft_push(&(*stack_b), &(*stack_a), 2);

@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 13:04:28 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/03/28 18:08:20 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/03/28 22:32:52 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,5 @@ int		ft_sort_array(int **array,int len);
 int		ft_sort_two(t_list **stack_a, t_list **stack_b, int flag);
 int		ft_srt3a(t_list **stack_a, t_list **stack_b);
 int		ft_srt3b(t_list **stack_a, t_list **stack_b);
+int		ft_lastchunkb(t_list **stack_a, t_list **stack_b);
 #endif

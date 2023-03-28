@@ -1,6 +1,7 @@
 //ATENTION!!!!!!
 // THIS FILE SHOULD BE DELETED BEFOR SUBMITING. HERE IS ONLY DEPRECATED CODE
 
+#include "pushswap.h"
 /**
  * @brief Writes to standard output the operation that should be done.
  * only for rra/rrb and ra/rb. 
@@ -97,4 +98,27 @@ int	ft_mysort(t_list **stack_a, t_list **stack_b, int len)
 		ft_push(&(*stack_b), &(*stack_a), 2);
 	}
 	return (0);
+}
+
+void	ft_sort_five(t_list **stack_a, t_list **stack_b)
+{
+	int		min;
+	int		i;
+	
+	i = 1;
+	while (ft_lowest_len(*stack_a, 2) > 3)
+	{
+		min = ft_lowest_len(*stack_a, 1);
+		if (i-- > 0 && THIRD == min)
+			ft_rotate(&(*stack_a), NULL, 1);
+		if (FIRST == min)
+			ft_push(&(*stack_a), &(*stack_b), 1);
+		else if (SECOND == min)
+			ft_rotate(&(*stack_a), NULL, 1);
+		else
+			ft_rotate(&(*stack_a), NULL, 3);
+	}
+	ft_sort_three(&(*stack_a));
+	ft_push(&(*stack_b), &(*stack_a), 2);
+	ft_push(&(*stack_b), &(*stack_a), 2);
 }

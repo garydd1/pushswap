@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 13:01:26 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/03/28 19:36:13 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/03/28 22:33:23 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,20 +111,22 @@ int	ft_medians_a(t_list **stack_a, t_list **stack_b, int *chunks, int *i)
 
 int	ft_medians_b(t_list **stack_a, t_list **stack_b, int *i)
 {
-	int	*array; //NEED TO BE FREED
+	int	*array;
 	int		pivot;
-	//GET HIGHER CHUNK
-		while (ft_topchunk_len(*stack_b) < 4)
-		{
-			if (ft_topchunk_len(*stack_b) == 1)
-				ft_push(&(*stack_b), &(*stack_a), 2);
-			else if (ft_topchunk_len(*stack_b) == 2)
-				ft_sort_two(&(*stack_a), &(*stack_b), 2);
-			else
-				ft_srt3b(&(*stack_a), &(*stack_b));
-		}	
-	// END GET HIGHER CHUNK
-	// SEND MEDIANS FROM B TO A
+	if (ft_lowest_len((*stack_b), 2) < 4)
+	{	
+		ft_lastchunkb(&(*stack_a), &(*stack_b));
+		return (0);
+	}		
+	while (ft_topchunk_len(*stack_b) < 4)
+	{
+		if (ft_topchunk_len(*stack_b) == 1)
+			ft_push(&(*stack_b), &(*stack_a), 2);
+		else if (ft_topchunk_len(*stack_b) == 2)
+			ft_sort_two(&(*stack_a), &(*stack_b), 2);
+		else
+			ft_srt3b(&(*stack_a), &(*stack_b));
+	}	
 	if (ft_topchunk_len(*stack_b) > 3)
 	{
 		array = ft_store_array(*stack_b, ft_topchunk_len(*stack_b), &pivot);	
@@ -132,7 +134,6 @@ int	ft_medians_b(t_list **stack_a, t_list **stack_b, int *i)
 		(*i)++;
 		ft_div_stack_b(&(*stack_a), &(*stack_b), pivot, &(*i));
 	}
-	//END SEND MEDIANS FROM B TO A
 	return (0);
 }
 
@@ -203,6 +204,22 @@ int	main(int argc, char **argv)
 		else 
 			ft_medians_a(&(stack_a), &(stack_b), chunks, &i);
 	}
+		// IF A IS SORTED AND B HAS CHUNKS!
+		ft_medians_b(&stack_a, &stack_b, &i);
+	
+	if (ft_is_sorted(stack_a) != 0)
+	{
+		printf("\ntop chunk len: '%d'\n", ft_topchunk_len(stack_a));
+		ft_printlst(stack_a);
+		if (ft_topchunk_len(stack_a) < 4)
+			ft_srt3a(&(stack_a), &(stack_b));
+		else 
+			ft_medians_a(&(stack_a), &(stack_b), chunks, &i);
+	}
+	//IF A IS SORTED AND B HAS CHUNKS!
+		ft_medians_b(&stack_a, &stack_b, &i);
+	
+	printf("\nlenb: '%d'\n", ft_lowest_len((stack_b), 2));
 	ft_printlst(stack_a);
 	ft_printlst(stack_b);
 	ft_print_chunks(stack_a);

@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 18:15:39 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/03/27 19:38:14 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/03/28 21:07:28 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,29 +70,6 @@ int	ft_lowest_len(t_list *stack, int flag)
 	if (flag == 2)
 		return (len);
 	return (lowest);
-}
-
-void	ft_sort_five(t_list **stack_a, t_list **stack_b)
-{
-	int		min;
-	int		i;
-	
-	i = 1;
-	while (ft_lowest_len(*stack_a, 2) > 3)
-	{
-		min = ft_lowest_len(*stack_a, 1);
-		if (i-- > 0 && THIRD == min)
-			ft_rotate(&(*stack_a), NULL, 1);
-		if (FIRST == min)
-			ft_push(&(*stack_a), &(*stack_b), 1);
-		else if (SECOND == min)
-			ft_rotate(&(*stack_a), NULL, 1);
-		else
-			ft_rotate(&(*stack_a), NULL, 3);
-	}
-	ft_sort_three(&(*stack_a));
-	ft_push(&(*stack_b), &(*stack_a), 2);
-	ft_push(&(*stack_b), &(*stack_a), 2);
 }
 
 int	ft_sort_array(int **array, int len)
